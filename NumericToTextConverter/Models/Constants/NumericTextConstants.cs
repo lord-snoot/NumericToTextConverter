@@ -4,6 +4,10 @@ namespace NumericToTextConverter.Models.Constants;
 
 public static class NumericTextConstants
 {
+    public static readonly int GroupSize = 3;
+    public static readonly string And = "AND";
+    public static readonly string Comma = ",";
+    public static readonly string Hyphen = "-";
     public static readonly Dictionary<int, string> Hundreds = new Dictionary<int, string>
     {
         { 1, nameof(HundredsNames.HUNDRED) },
