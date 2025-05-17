@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NumericToTextConverter.Controllers;
 
@@ -10,8 +11,8 @@ public class ConverterController : Controller
         return View();
     }
 
-    public IActionResult Convert()
+    public string Convert(string input)
     {
-        return View();
+        return HtmlEncoder.Default.Encode(input);
     }
 }
