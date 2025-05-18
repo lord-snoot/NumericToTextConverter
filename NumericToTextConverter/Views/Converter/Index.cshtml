@@ -1,11 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Converter";
 }
+@using (Html.BeginForm("Index", "Converter", FormMethod.Post))
+{
+    <div>
+        <h1>@ViewData["Title"]</h1>
 
-<div>
-    <h1>@ViewData["Title"]</h1>
+        <p>@ViewData["output"]</p>
 
-    <p>Input a number:</p>
+        <div>
+            @Html.TextBox("input", "", new { onchange = "this.form.submit()" })
+        </div>
 
-    <input type="text">
-</div>
+    </div>
+}
