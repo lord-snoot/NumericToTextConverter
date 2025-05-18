@@ -13,7 +13,7 @@ public static class NumericTextConstants
     public static readonly string Comma = ",";
     public static readonly string Hyphen = "-";
     public static readonly string Space = " ";
-    public static readonly string Hundred = "Hundred";
+    public static readonly string Hundred = "HUNDRED";
     
     public static readonly Dictionary<int, string> Thousands = new Dictionary<int, string>
     {

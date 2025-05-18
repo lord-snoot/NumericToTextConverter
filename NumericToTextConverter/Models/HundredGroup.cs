@@ -6,15 +6,15 @@ namespace NumericToTextConverter.Models;
 
 public class HundredGroup
 {
-    public HundredGroup(string number, int thousand)
+    public HundredGroup(string numberText, int thousand)
     {
-        List<string> numberList = number.Split("").ToList();
-        numberList.Reverse();
-        One = int.Parse(numberList[NumericTextConstants.OnePos]);
-        Ten = numberList.Count > NumericTextConstants.TenPos ? int.Parse(numberList[NumericTextConstants.TenPos]) : 0;
-        Hundred = numberList.Count > NumericTextConstants.HundredPos
-            ? int.Parse(numberList[NumericTextConstants.HundredPos])
-            : 0;
+        int textEnd = numberText.Length - 1;
+        One = int.Parse(numberText.Substring(textEnd, 1));
+        Ten = numberText.Length > NumericTextConstants.TenPos 
+            ? int.Parse(numberText.Substring(textEnd - NumericTextConstants.TenPos, 1)) : 0;
+        Hundred = numberText.Length > NumericTextConstants.HundredPos
+            ? int.Parse(numberText.Substring(textEnd - NumericTextConstants.HundredPos, 1)) : 0;
+        
         Thousand = thousand;
     }
 
@@ -25,47 +25,46 @@ public class HundredGroup
 
     public string GetOneName()
     {
-        string name = string.Empty;
         if (One == (int) OnesNames.ZERO && (Ten > (int) TensNames.ZERO || Hundred > (int) HundredsNames.ZERO))
         {
-            return name;
+            return string.Empty;
         }
         else if (Ten == (int) TensNames.TEN)
         {
             //the compiler says the .ToString() calls are redundant but it errors if they are removed
             int tenAndOne = int.Parse(Ten.ToString() + One.ToString());
-            return NumericTextConstants.Ones.TryGetValue(tenAndOne, out name) ? name : string.Empty;
+            return NumericTextConstants.Ones.TryGetValue(tenAndOne, out string? name) ? name : string.Empty;
         }
         else
         {
-            return NumericTextConstants.Ones.TryGetValue(One, out name) ? name : string.Empty;
+            return NumericTextConstants.Ones.TryGetValue(One, out string? name) ? name : string.Empty;
         }
     }
 
     public string GetTenName()
     {
-        string name = string.Empty;
         if (Ten >= (int) TensNames.TWENTY)
         {
-            return NumericTextConstants.Tens.TryGetValue(Ten, out name) 
+            return NumericTextConstants.Tens.TryGetValue(Ten, out string? name) 
                 ? name + NumericTextConstants.Hyphen : string.Empty;
         }
-        else
+        else if (Ten == (int) TensNames.TEN && One > (int) OnesNames.ZERO)
         {
-            return NumericTextConstants.Tens.TryGetValue(Ten, out name) ? name : string.Empty;
+            return string.Empty;
+        }
+        {
+            return NumericTextConstants.Tens.TryGetValue(Ten, out string? name) ? name : string.Empty;
         }
     }
 
     public string GetHundredName()
     {
-        string name = string.Empty;
-        return NumericTextConstants.Hundreds.TryGetValue(Hundred, out name) ? name : string.Empty;;
+        return NumericTextConstants.Hundreds.TryGetValue(Hundred, out string? name) ? name : string.Empty;;
     }
 
     public string GetThousandName()
     {
-        string name = string.Empty;
-        return NumericTextConstants.Thousands.TryGetValue(Thousand, out name) ? name : string.Empty;
+        return NumericTextConstants.Thousands.TryGetValue(Thousand, out string? name) ? name : string.Empty;
     }
 
     public string GetGroupName()
@@ -78,6 +77,7 @@ public class HundredGroup
             builder.Append(NumericTextConstants.Hundred);
             if (!string.IsNullOrEmpty(GetTenName()) || !string.IsNullOrEmpty(GetOneName()))
             {
+                builder.Append(NumericTextConstants.Space);
                 builder.Append(NumericTextConstants.And);
                 builder.Append(NumericTextConstants.Space);
             }
@@ -93,7 +93,7 @@ public class HundredGroup
             builder.Append(GetOneName());
         }
 
-        if (string.IsNullOrEmpty(GetThousandName()))
+        if (!string.IsNullOrEmpty(GetThousandName()))
         {
             builder.Append(NumericTextConstants.Space);
             builder.Append(GetThousandName());
