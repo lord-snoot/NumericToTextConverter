@@ -28,7 +28,10 @@ public static class NumericTextConstants
         { (int) ThousandsNames.TRILLION, nameof(ThousandsNames.TRILLION) },
         { (int) ThousandsNames.QUADRILLION, nameof(ThousandsNames.QUADRILLION) },
         { (int) ThousandsNames.QUINTILLION, nameof(ThousandsNames.QUINTILLION) },
-        { (int) ThousandsNames.SEXTILLION, nameof(ThousandsNames.SEXTILLION) }
+        { (int) ThousandsNames.SEXTILLION, nameof(ThousandsNames.SEXTILLION) },
+        { (int) ThousandsNames.SEPTILLION, nameof(ThousandsNames.SEPTILLION) },
+        { (int) ThousandsNames.OCTILLION, nameof(ThousandsNames.OCTILLION) }
+        
     };
 
     public static readonly Dictionary<int, string> Hundreds = new Dictionary<int, string>

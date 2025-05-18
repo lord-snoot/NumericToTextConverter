@@ -10,5 +10,6 @@ public enum ThousandsNames
     QUADRILLION = 5,
     QUINTILLION = 6,
     SEXTILLION = 7,
-    SEPTILLION = 8
+    SEPTILLION = 8,
+    OCTILLION = 9
 }
