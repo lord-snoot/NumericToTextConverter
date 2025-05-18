@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Converter";
+}
+@using (Html.BeginForm("Index", "Converter", FormMethod.Post))
+{
+    <div>
+        <h1>@ViewData["Title"]</h1>
+
+        <p>@ViewData["output"]</p>
+
+        <div>
+            @Html.TextBox("input", "", new { onchange = "this.form.submit()" })
+        </div>
+
+    </div>
+}
