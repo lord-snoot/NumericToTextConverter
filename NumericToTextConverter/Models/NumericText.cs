@@ -13,6 +13,12 @@ public class NumericText
             string[] decimalSplit = numberString.Split(NumericTextConstants.DecimalSeparator);
             string wholeNumberString = decimalSplit[0];
             string decimalString = decimalSplit[1];
+
+            //0.1 is 0.10, need to add the zero
+            if (decimalString.Length == 1)
+            {
+                decimalString += "0";
+            }
                 
             AddWholeGroups(parseTextToHundredGroups(wholeNumberString));
             AddDecimalGroups(parseTextToHundredGroups(decimalString));
