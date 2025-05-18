@@ -1,7 +1,5 @@
-﻿using System.Text.Encodings.Web;
-using NumericToTextConverter.Models;
+﻿using NumericToTextConverter.Models;
 using NumericToTextConverter.Models.Constants;
-using NumericToTextConverter.Models.Enum;
 
 namespace NumericToTextConverter.Service;
 
@@ -38,28 +36,11 @@ public class ConverterService : IConverterService
                 }
             }
             
-            return new NumericText(numberString).GetText();
+            return new CurrencyText(numberString).GetText();
         }
         else
         {
             return ErrorInvalid + input + ". " + ErrorEmpty;
         }
-    }
-
-    private string validate(string input)
-    {
-        string output = "";
-        if (string.IsNullOrEmpty(input))
-        {
-            output = "Please enter a value.";
-        } else if (decimal.TryParse(input, out _))
-        {
-            
-        }
-        else
-        {
-            output = "Invalid value, please enter a numeric value with up to two decimal places.";
-        }
-        return output;
     }
 }

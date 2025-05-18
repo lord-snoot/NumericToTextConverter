@@ -14,7 +14,7 @@ public static class NumericTextConstants
     
     public static readonly string Decimal = "POINT";
     public static readonly string And = "AND";
-    public static readonly string Comma = ",";
+    public static readonly string CommaWithSpace = ", ";
     public static readonly string Hyphen = "-";
     public static readonly string Space = " ";
     public static readonly string Hundred = "HUNDRED";

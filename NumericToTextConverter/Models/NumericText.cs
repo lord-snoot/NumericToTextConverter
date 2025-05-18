@@ -23,8 +23,8 @@ public class NumericText
         }
     }
     
-    private SortedList<int, HundredGroup> _wholeGroups = new SortedList<int, HundredGroup>();
-    private SortedList<int, HundredGroup> _decimalGroups = new SortedList<int, HundredGroup>();
+    protected SortedList<int, HundredGroup> WholeGroups = new SortedList<int, HundredGroup>();
+    protected SortedList<int, HundredGroup> DecimalGroups = new SortedList<int, HundredGroup>();
 
     private void AddWholeGroups(List<HundredGroup> wholeGroups)
     {
@@ -36,7 +36,7 @@ public class NumericText
     
     private void AddWholeGroup(HundredGroup hundredGroup)
     {
-        _wholeGroups.Add(hundredGroup.GetThousand(), hundredGroup);
+        WholeGroups.Add(hundredGroup.GetThousand(), hundredGroup);
     }
 
     private void AddDecimalGroups(List<HundredGroup> decimalGroups)
@@ -49,31 +49,31 @@ public class NumericText
     
     private void AddDecimalGroup(HundredGroup hundredGroup)
     {
-        _decimalGroups.Add(hundredGroup.GetThousand(), hundredGroup);
+        DecimalGroups.Add(hundredGroup.GetThousand(), hundredGroup);
     }
 
-    private String GetWholeGroupsText()
+    protected String GetWholeGroupsText()
     {
         List<string> wholeGroupText = new List<string>();
-        foreach (HundredGroup wholeGroup in _wholeGroups.Values)
+        foreach (HundredGroup wholeGroup in WholeGroups.Values)
         {
             wholeGroupText.Add(wholeGroup.GetGroupText());
         }
         
         wholeGroupText.Reverse();
-        return string.Join(NumericTextConstants.Comma, wholeGroupText);
+        return string.Join(NumericTextConstants.CommaWithSpace, wholeGroupText);
     }
 
-    private String GetDecimalGroupsText()
+    protected String GetDecimalGroupsText()
     {
         List<string> decimalGroupText = new List<string>();
-        foreach (HundredGroup decimalGroup in _decimalGroups.Values)
+        foreach (HundredGroup decimalGroup in DecimalGroups.Values)
         {
             decimalGroupText.Add(decimalGroup.GetGroupText());
         }
         
         decimalGroupText.Reverse();
-        return string.Join(NumericTextConstants.Comma, decimalGroupText);
+        return string.Join(NumericTextConstants.CommaWithSpace, decimalGroupText);
     }
     
     private List<HundredGroup> parseTextToHundredGroups(string input)
@@ -105,17 +105,17 @@ public class NumericText
         return hundredGroups;
     }
 
-    public string GetText()
+    public virtual string GetText()
     {
         StringBuilder builder = new StringBuilder();
-        if (_wholeGroups.Count > 0)
+        if (WholeGroups.Count > 0)
         {
             builder.Append(GetWholeGroupsText());
         }
 
-        if (_decimalGroups.Count > 0)
+        if (DecimalGroups.Count > 0)
         {
-            if (_wholeGroups.Count > 0)
+            if (WholeGroups.Count > 0)
             {
                 builder.Append(NumericTextConstants.Space);
             }
