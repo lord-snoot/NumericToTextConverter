@@ -4,56 +4,78 @@ namespace NumericToTextConverter.Models.Constants;
 
 public static class NumericTextConstants
 {
+    public static readonly int OnePos = 0;
+    public static readonly int TenPos = 1;
+    public static readonly int HundredPos = 2;
     public static readonly int GroupSize = 3;
+    
     public static readonly string And = "AND";
     public static readonly string Comma = ",";
     public static readonly string Hyphen = "-";
+    public static readonly string Space = " ";
+    public static readonly string Hundred = "Hundred";
+    
+    public static readonly Dictionary<int, string> Thousands = new Dictionary<int, string>
+    {
+        { (int) ThousandsNames.ZERO, string.Empty },
+        { (int) ThousandsNames.THOUSAND, nameof(ThousandsNames.THOUSAND) },
+        { (int) ThousandsNames.MILLION, nameof(ThousandsNames.MILLION) },
+        { (int) ThousandsNames.BILLION, nameof(ThousandsNames.BILLION) },
+        { (int) ThousandsNames.TRILLION, nameof(ThousandsNames.TRILLION) },
+        { (int) ThousandsNames.QUADRILLION, nameof(ThousandsNames.QUADRILLION) },
+        { (int) ThousandsNames.QUINTILLION, nameof(ThousandsNames.QUINTILLION) },
+        { (int) ThousandsNames.SEXTILLION, nameof(ThousandsNames.SEXTILLION) }
+    };
+
     public static readonly Dictionary<int, string> Hundreds = new Dictionary<int, string>
     {
-        { 1, nameof(HundredsNames.HUNDRED) },
-        { 2, nameof(HundredsNames.THOUSAND) },
-        { 3, nameof(HundredsNames.MILLION) },
-        { 4, nameof(HundredsNames.BILLION) },
-        { 5, nameof(HundredsNames.TRILLION) },
-        { 6, nameof(HundredsNames.QUADRILLION) },
-        { 7, nameof(HundredsNames.QUINTILLION) },
-        { 8, nameof(HundredsNames.SEXTILLION) }
+        { (int) HundredsNames.ZERO, string.Empty },
+        { (int) HundredsNames.ONE, nameof(HundredsNames.ONE) },
+        { (int) HundredsNames.TWO, nameof(HundredsNames.TWO) },
+        { (int) HundredsNames.THREE, nameof(HundredsNames.THREE) },
+        { (int) HundredsNames.FOUR, nameof(HundredsNames.FOUR) },
+        { (int) HundredsNames.FIVE, nameof(HundredsNames.FIVE) },
+        { (int) HundredsNames.SIX, nameof(HundredsNames.SIX) },
+        { (int) HundredsNames.SEVEN, nameof(HundredsNames.SEVEN) },
+        { (int) HundredsNames.EIGHT, nameof(HundredsNames.EIGHT) },
+        { (int) HundredsNames.NINE, nameof(HundredsNames.NINE) }
     };
 
     public static readonly Dictionary<int, string> Tens = new Dictionary<int, string>
     {
-        { 1, nameof(TensNames.TEN) },
-        { 2, nameof(TensNames.TWENTY) },
-        { 3, nameof(TensNames.THIRTY) },
-        { 4, nameof(TensNames.FORTY) },
-        { 5, nameof(TensNames.FIFTY) },
-        { 6, nameof(TensNames.SIXTY) },
-        { 7, nameof(TensNames.SEVENTY) },
-        { 8, nameof(TensNames.EIGHTY) },
-        { 9, nameof(TensNames.NINETY) }
+        { (int) TensNames.ZERO, string.Empty },
+        { (int) TensNames.TEN, nameof(TensNames.TEN) },
+        { (int) TensNames.TWENTY, nameof(TensNames.TWENTY) },
+        { (int) TensNames.THIRTY, nameof(TensNames.THIRTY) },
+        { (int) TensNames.FORTY, nameof(TensNames.FORTY) },
+        { (int) TensNames.FIFTY, nameof(TensNames.FIFTY) },
+        { (int) TensNames.SIXTY, nameof(TensNames.SIXTY) },
+        { (int) TensNames.SEVENTY, nameof(TensNames.SEVENTY) },
+        { (int) TensNames.EIGHTY, nameof(TensNames.EIGHTY) },
+        { (int) TensNames.NINETY, nameof(TensNames.NINETY) }
     };
     
     public static readonly Dictionary<int, string> Ones = new Dictionary<int, string>
     {
-        { 0, nameof(OnesNames.ZERO) },
-        { 1, nameof(OnesNames.ONE) },
-        { 2, nameof(OnesNames.TWO) },
-        { 3, nameof(OnesNames.THREE) },
-        { 4, nameof(OnesNames.FOUR) },
-        { 5, nameof(OnesNames.FIVE) },
-        { 6, nameof(OnesNames.SIX) },
-        { 7, nameof(OnesNames.SEVEN) },
-        { 8, nameof(OnesNames.EIGHT) },
-        { 9, nameof(OnesNames.NINE) },
-        { 10, nameof(OnesNames.TEN) },
-        { 11, nameof(OnesNames.ELEVEN) },
-        { 12, nameof(OnesNames.TWELVE) },
-        { 13, nameof(OnesNames.THIRTEEN) },
-        { 14, nameof(OnesNames.FOURTEEN) },
-        { 15, nameof(OnesNames.FIFTEEN) },
-        { 16, nameof(OnesNames.SIXTEEN) },
-        { 17, nameof(OnesNames.SEVENTEEN) },
-        { 18, nameof(OnesNames.EIGHTEEN) },
-        { 19, nameof(OnesNames.NINETEEN) }
+        { (int) OnesNames.ZERO, nameof(OnesNames.ZERO) },
+        { (int) OnesNames.ONE, nameof(OnesNames.ONE) },
+        { (int) OnesNames.TWO, nameof(OnesNames.TWO) },
+        { (int) OnesNames.THREE, nameof(OnesNames.THREE) },
+        { (int) OnesNames.FOUR, nameof(OnesNames.FOUR) },
+        { (int) OnesNames.FIVE, nameof(OnesNames.FIVE) },
+        { (int) OnesNames.SIX, nameof(OnesNames.SIX) },
+        { (int) OnesNames.SEVEN, nameof(OnesNames.SEVEN) },
+        { (int) OnesNames.EIGHT, nameof(OnesNames.EIGHT) },
+        { (int) OnesNames.NINE, nameof(OnesNames.NINE) },
+        { (int) OnesNames.TEN, nameof(OnesNames.TEN) },
+        { (int) OnesNames.ELEVEN, nameof(OnesNames.ELEVEN) },
+        { (int) OnesNames.TWELVE, nameof(OnesNames.TWELVE) },
+        { (int) OnesNames.THIRTEEN, nameof(OnesNames.THIRTEEN) },
+        { (int) OnesNames.FOURTEEN, nameof(OnesNames.FOURTEEN) },
+        { (int) OnesNames.FIFTEEN, nameof(OnesNames.FIFTEEN) },
+        { (int) OnesNames.SIXTEEN, nameof(OnesNames.SIXTEEN) },
+        { (int) OnesNames.SEVENTEEN, nameof(OnesNames.SEVENTEEN) },
+        { (int) OnesNames.EIGHTEEN, nameof(OnesNames.EIGHTEEN) },
+        { (int) OnesNames.NINETEEN, nameof(OnesNames.NINETEEN) }
     };
 }
