@@ -7,6 +7,10 @@ namespace NumericToTextConverter.Service;
 
 public class ConverterService : IConverterService
 {
+    private static readonly string ErrorEmpty = "Please provide a number with up to two decimals.";
+    private static readonly string ErrorInvalid = "Invalid number: ";
+    private static readonly string ErrorDecimals = "Number can not have more than two decimals.";
+    
     public ConverterService()
     {
         
@@ -14,36 +18,32 @@ public class ConverterService : IConverterService
     
     public string Convert(string input)
     {
-        List<HundredGroup> hundredGroups = new List<HundredGroup>();
-        int thousandCount = (int) ThousandsNames.ZERO;
-        for (int i = input.Length; i > 0; i-= NumericTextConstants.GroupSize)
+        if (string.IsNullOrEmpty(input))
         {
-            string groupString;
-            if (i > NumericTextConstants.GroupSize)
+            return ErrorEmpty;
+        }
+        else if (decimal.TryParse(input, out decimal number))
+        {
+            //Parse back into a string to remove any trailing zeroes
+            string numberString = number.ToString();
+            
+            if (numberString.Contains(NumericTextConstants.DecimalSeparator))
             {
-                groupString = input.Substring(
-                    i - NumericTextConstants.GroupSize, 
-                    NumericTextConstants.GroupSize)
-                ;
-            }
-            else
-            {
-                groupString = input.Substring(0, i);
+                string[] decimalSplit = numberString.Split(NumericTextConstants.DecimalSeparator);
+                string decimalString = decimalSplit[1];
+                
+                if (decimalString.Length > NumericTextConstants.MaxDecimals)
+                {
+                    return ErrorInvalid + input + ". " + ErrorDecimals;
+                }
             }
             
-            HundredGroup hundredGroup = new HundredGroup(groupString, thousandCount);
-            hundredGroups.Add(hundredGroup);
-            thousandCount++;
+            return new NumericText(numberString).GetText();
         }
-
-        List<string> inputGroups = new List<string>();
-        hundredGroups.Reverse();
-        foreach (HundredGroup hundredGroup in hundredGroups)
+        else
         {
-            inputGroups.Add(hundredGroup.GetGroupName());
+            return ErrorInvalid + input + ". " + ErrorEmpty;
         }
-        
-        return string.Join(", ", inputGroups);
     }
 
     private string validate(string input)

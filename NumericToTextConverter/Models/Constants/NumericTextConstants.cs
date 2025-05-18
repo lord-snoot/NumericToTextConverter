@@ -8,7 +8,11 @@ public static class NumericTextConstants
     public static readonly int TenPos = 1;
     public static readonly int HundredPos = 2;
     public static readonly int GroupSize = 3;
+    public static readonly int MaxDecimals = 2;
     
+    public static readonly string DecimalSeparator = ".";
+    
+    public static readonly string Decimal = "POINT";
     public static readonly string And = "AND";
     public static readonly string Comma = ",";
     public static readonly string Hyphen = "-";

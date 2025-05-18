@@ -67,7 +67,12 @@ public class HundredGroup
         return NumericTextConstants.Thousands.TryGetValue(Thousand, out string? name) ? name : string.Empty;
     }
 
-    public string GetGroupName()
+    public int GetThousand()
+    {
+        return Thousand;
+    }
+
+    public string GetGroupText()
     {
         StringBuilder builder = new StringBuilder();
         if (!string.IsNullOrEmpty(GetHundredName()))
