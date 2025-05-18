@@ -56,6 +56,9 @@ public class ConverterServiceTests
     [TestCase("80", ExpectedResult = "EIGHTY DOLLARS")]
     [TestCase("90", ExpectedResult = "NINETY DOLLARS")]
     
+    //Test hyphenation
+    [TestCase("25", ExpectedResult = "TWENTY-FIVE DOLLARS")]
+    
     //Test all HundredsNames
     [TestCase("100", ExpectedResult = "ONE HUNDRED DOLLARS")]
     [TestCase("200", ExpectedResult = "TWO HUNDRED DOLLARS")]
@@ -66,6 +69,17 @@ public class ConverterServiceTests
     [TestCase("700", ExpectedResult = "SEVEN HUNDRED DOLLARS")]
     [TestCase("800", ExpectedResult = "EIGHT HUNDRED DOLLARS")]
     [TestCase("900", ExpectedResult = "NINE HUNDRED DOLLARS")]
+    
+    //Test all ThousandsNames
+    [TestCase("1000", ExpectedResult = "ONE THOUSAND DOLLARS")]
+    [TestCase("1000000", ExpectedResult = "ONE MILLION DOLLARS")]
+    [TestCase("1000000000", ExpectedResult = "ONE BILLION DOLLARS")]
+    [TestCase("1000000000000", ExpectedResult = "ONE TRILLION DOLLARS")]
+    [TestCase("1000000000000000", ExpectedResult = "ONE QUADRILLION DOLLARS")]
+    [TestCase("1000000000000000000", ExpectedResult = "ONE QUINTILLION DOLLARS")]
+    [TestCase("1000000000000000000000", ExpectedResult = "ONE SEXTILLION DOLLARS")]
+    [TestCase("1000000000000000000000000", ExpectedResult = "ONE SEPTILLION DOLLARS")]
+    [TestCase("1000000000000000000000000000", ExpectedResult = "ONE OCTILLION DOLLARS")]
     
     public string TestConverterService(string input)
     {

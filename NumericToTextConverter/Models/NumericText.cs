@@ -52,28 +52,22 @@ public class NumericText
         DecimalGroups.Add(hundredGroup.GetThousand(), hundredGroup);
     }
 
-    protected String GetWholeGroupsText()
+    protected String GetHundredGroupsText(IList<HundredGroup> hundredGroups)
     {
-        List<string> wholeGroupText = new List<string>();
-        foreach (HundredGroup wholeGroup in WholeGroups.Values)
+        List<string> hundredGroupList = new List<string>();
+        foreach (HundredGroup hundredGroup in hundredGroups)
         {
-            wholeGroupText.Add(wholeGroup.GetGroupText());
+            string hundredGroupText = hundredGroup.GetGroupText();
+            if (!string.IsNullOrEmpty(hundredGroupText)
+                && !(hundredGroupText.Equals(nameof(OnesNames.ZERO)) && hundredGroups.Count > 1)
+               )
+            {
+                hundredGroupList.Add(hundredGroupText);
+            }
         }
         
-        wholeGroupText.Reverse();
-        return string.Join(NumericTextConstants.CommaWithSpace, wholeGroupText);
-    }
-
-    protected String GetDecimalGroupsText()
-    {
-        List<string> decimalGroupText = new List<string>();
-        foreach (HundredGroup decimalGroup in DecimalGroups.Values)
-        {
-            decimalGroupText.Add(decimalGroup.GetGroupText());
-        }
-        
-        decimalGroupText.Reverse();
-        return string.Join(NumericTextConstants.CommaWithSpace, decimalGroupText);
+        hundredGroupList.Reverse();
+        return string.Join(NumericTextConstants.CommaWithSpace, hundredGroupList);
     }
     
     private List<HundredGroup> parseTextToHundredGroups(string input)
@@ -110,7 +104,7 @@ public class NumericText
         StringBuilder builder = new StringBuilder();
         if (WholeGroups.Count > 0)
         {
-            builder.Append(GetWholeGroupsText());
+            builder.Append(GetHundredGroupsText(WholeGroups.Values));
         }
 
         if (DecimalGroups.Count > 0)
@@ -123,7 +117,7 @@ public class NumericText
             builder.Append(NumericTextConstants.Decimal);
             builder.Append(NumericTextConstants.Space);
             
-            builder.Append(GetDecimalGroupsText());
+            builder.Append(GetHundredGroupsText(DecimalGroups.Values));
         }
         return builder.ToString();
     }

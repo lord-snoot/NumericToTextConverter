@@ -16,10 +16,11 @@ public class CurrencyText : NumericText
         StringBuilder builder = new StringBuilder();
         if (WholeGroups.Count > 0)
         {
-            builder.Append(GetWholeGroupsText());
+            
+            builder.Append(GetHundredGroupsText(WholeGroups.Values));
             builder.Append(CurrencyTextConstants.Space);
             builder.Append(CurrencyTextConstants.Dollar);
-            if (!GetWholeGroupsText().Equals(nameof(OnesNames.ONE)))
+            if (!GetHundredGroupsText(WholeGroups.Values).Equals(nameof(OnesNames.ONE)))
             {
                 builder.Append(CurrencyTextConstants.Plural);
             }
@@ -34,10 +35,10 @@ public class CurrencyText : NumericText
                 builder.Append(CurrencyTextConstants.Space);
             }
             
-            builder.Append(GetDecimalGroupsText());
+            builder.Append(GetHundredGroupsText(DecimalGroups.Values));
             builder.Append(CurrencyTextConstants.Space);
             builder.Append(CurrencyTextConstants.Cent);
-            if (!GetDecimalGroupsText().Equals(nameof(OnesNames.ONE)))
+            if (!GetHundredGroupsText(DecimalGroups.Values).Equals(nameof(OnesNames.ONE)))
             {
                 
                 builder.Append(CurrencyTextConstants.Plural);

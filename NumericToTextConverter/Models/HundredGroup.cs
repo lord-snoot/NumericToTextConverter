@@ -25,7 +25,12 @@ public class HundredGroup
 
     public string GetOneName()
     {
-        if (One == (int) OnesNames.ZERO && (Ten > (int) TensNames.ZERO || Hundred > (int) HundredsNames.ZERO))
+        if (One == (int) OnesNames.ZERO && (
+                Ten > (int) TensNames.ZERO 
+                || Hundred > (int) HundredsNames.ZERO 
+                || Thousand > (int) ThousandsNames.ZERO
+                )
+            )
         {
             return string.Empty;
         }
@@ -75,7 +80,14 @@ public class HundredGroup
 
     public string GetThousandName()
     {
-        return NumericTextConstants.Thousands.TryGetValue(Thousand, out string? name) ? name : string.Empty;
+        if (One > (int)OnesNames.ZERO || Ten > (int)TensNames.ZERO || Hundred > (int)HundredsNames.ZERO)
+        {
+            return NumericTextConstants.Thousands.TryGetValue(Thousand, out string? name) ? name : string.Empty;
+        }
+        else
+        {
+            return string.Empty;
+        }
     }
 
     public int GetThousand()
