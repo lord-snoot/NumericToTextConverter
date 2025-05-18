@@ -35,9 +35,20 @@ public class HundredGroup
             int tenAndOne = int.Parse(Ten.ToString() + One.ToString());
             return NumericTextConstants.Ones.TryGetValue(tenAndOne, out string? name) ? name : string.Empty;
         }
+        else if (NumericTextConstants.Ones.TryGetValue(One, out string? name))
+        {
+            if (Ten >= (int) TensNames.TWENTY)
+            {
+                return NumericTextConstants.Hyphen + name;
+            }
+            else
+            {
+                return name;
+            }
+        }
         else
         {
-            return NumericTextConstants.Ones.TryGetValue(One, out string? name) ? name : string.Empty;
+            return string.Empty;
         }
     }
 
@@ -46,7 +57,7 @@ public class HundredGroup
         if (Ten >= (int) TensNames.TWENTY)
         {
             return NumericTextConstants.Tens.TryGetValue(Ten, out string? name) 
-                ? name + NumericTextConstants.Hyphen : string.Empty;
+                ? name : string.Empty;
         }
         else if (Ten == (int) TensNames.TEN && One > (int) OnesNames.ZERO)
         {
