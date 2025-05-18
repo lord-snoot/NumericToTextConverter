@@ -1,7 +1,10 @@
+using NumericToTextConverter.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IConverterService, ConverterService>();
 
 var app = builder.Build();
 

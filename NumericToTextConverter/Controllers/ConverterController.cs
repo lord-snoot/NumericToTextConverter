@@ -6,9 +6,9 @@ namespace NumericToTextConverter.Controllers;
 
 public class ConverterController : Controller
 {
-    private readonly ConverterService _converterService;
+    private readonly IConverterService _converterService;
 
-    public ConverterController(ConverterService converterService)
+    public ConverterController(IConverterService converterService)
     {
         _converterService = converterService;
     }

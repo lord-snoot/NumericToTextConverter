@@ -1,9 +1,11 @@
 ﻿using System.Text.Encodings.Web;
+using NumericToTextConverter.Models;
 using NumericToTextConverter.Models.Constants;
+using NumericToTextConverter.Models.Enum;
 
 namespace NumericToTextConverter.Service;
 
-public class ConverterService
+public class ConverterService : IConverterService
 {
     public ConverterService()
     {
@@ -12,27 +14,36 @@ public class ConverterService
     
     public string Convert(string input)
     {
-        
-        
-        List<string> inputGroups = new List<string>();
+        List<HundredGroup> hundredGroups = new List<HundredGroup>();
+        int thousandCount = (int) ThousandsNames.ZERO;
         for (int i = input.Length; i > 0; i-= NumericTextConstants.GroupSize)
         {
+            string groupString;
             if (i > NumericTextConstants.GroupSize)
             {
-                inputGroups.Add(input.Substring(
+                groupString = input.Substring(
                     i - NumericTextConstants.GroupSize, 
                     NumericTextConstants.GroupSize)
-                );
+                ;
             }
             else
             {
-                inputGroups.Add(input.Substring(0, i));
+                groupString = input.Substring(0, i);
             }
+            
+            HundredGroup hundredGroup = new HundredGroup(groupString, thousandCount);
+            hundredGroups.Add(hundredGroup);
+            thousandCount++;
         }
 
-        inputGroups.Reverse();
+        List<string> inputGroups = new List<string>();
+        hundredGroups.Reverse();
+        foreach (HundredGroup hundredGroup in hundredGroups)
+        {
+            inputGroups.Add(hundredGroup.GetGroupName());
+        }
         
-        return string.Join(",", inputGroups);
+        return string.Join(", ", inputGroups);
     }
 
     private string validate(string input)
