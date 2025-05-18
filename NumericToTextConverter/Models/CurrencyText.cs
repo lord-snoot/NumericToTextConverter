@@ -14,6 +14,12 @@ public class CurrencyText : NumericText
     public override string GetText()
     {
         StringBuilder builder = new StringBuilder();
+        if (Negative)
+        {
+            builder.Append(CurrencyTextConstants.Negative);
+            builder.Append(CurrencyTextConstants.Space);
+        }
+        
         if (WholeGroups.Count > 0)
         {
             

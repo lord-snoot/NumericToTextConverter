@@ -8,6 +8,12 @@ public class NumericText
 {
     public NumericText(string numberString)
     {
+        if (numberString.StartsWith(NumericTextConstants.NegativeSymbol))
+        {
+            Negative = true;
+            numberString = numberString.Replace(NumericTextConstants.NegativeSymbol, string.Empty);
+        }
+        
         if (numberString.Contains(NumericTextConstants.DecimalSeparator))
         {
             string[] decimalSplit = numberString.Split(NumericTextConstants.DecimalSeparator);
@@ -28,6 +34,8 @@ public class NumericText
             AddWholeGroups(parseTextToHundredGroups(numberString));
         }
     }
+
+    protected bool Negative = false;
     
     protected SortedList<int, HundredGroup> WholeGroups = new SortedList<int, HundredGroup>();
     protected SortedList<int, HundredGroup> DecimalGroups = new SortedList<int, HundredGroup>();
@@ -108,6 +116,12 @@ public class NumericText
     public virtual string GetText()
     {
         StringBuilder builder = new StringBuilder();
+        if (Negative)
+        {
+            builder.Append(NumericTextConstants.Negative);
+            builder.Append(NumericTextConstants.Space);
+        }
+        
         if (WholeGroups.Count > 0)
         {
             builder.Append(GetHundredGroupsText(WholeGroups.Values));

@@ -11,13 +11,15 @@ public static class NumericTextConstants
     public static readonly int MaxDecimals = 2;
     
     public static readonly string DecimalSeparator = ".";
+    public static readonly string NegativeSymbol = "-";
     
-    public static readonly string Decimal = "POINT";
     public static readonly string And = "AND";
+    public static readonly string Decimal = "POINT";
+    public static readonly string Hundred = "HUNDRED";
+    public static readonly string Negative = "NEGATIVE";
     public static readonly string CommaWithSpace = ", ";
     public static readonly string Hyphen = "-";
     public static readonly string Space = " ";
-    public static readonly string Hundred = "HUNDRED";
     
     public static readonly Dictionary<int, string> Thousands = new Dictionary<int, string>
     {

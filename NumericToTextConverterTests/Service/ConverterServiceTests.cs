@@ -33,6 +33,8 @@ public class ConverterServiceTests
     [TestCase("25", ExpectedResult = "TWENTY-FIVE DOLLARS")]
     
     //Various combinations and edge cases
+    [TestCase("-1", ExpectedResult = "NEGATIVE ONE DOLLAR")]
+    [TestCase("-0.45", ExpectedResult = "NEGATIVE ZERO DOLLARS AND FORTY-FIVE CENTS")]
     [TestCase("0.01", ExpectedResult = "ZERO DOLLARS AND ONE CENT")]
     [TestCase("0.1", ExpectedResult = "ZERO DOLLARS AND TEN CENTS")]
     [TestCase("101", ExpectedResult = "ONE HUNDRED AND ONE DOLLARS")]
